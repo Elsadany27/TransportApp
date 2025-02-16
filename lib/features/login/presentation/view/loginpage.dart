@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trasportation/core/utilities/app_images.dart';
 import 'package:trasportation/features/login/presentation/view%20model/logincubit.dart';
 import 'package:trasportation/features/login/presentation/view%20model/loginstate.dart';
+import 'package:trasportation/features/login/presentation/view/qrScaanPage.dart';
 import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
 
 import '../../../../core/constant/CustomeElevatedBustton.dart';
@@ -42,7 +43,9 @@ class LoginPage extends StatelessWidget {
   },
 ),
               //button
-              CustomeElevatedBustton(ontap: (){},textt: "تسجيل الدخول",)
+              CustomeElevatedBustton(ontap: (){
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => QrScaanPage(),), (route) => false,);
+              },textt: "تسجيل الدخول",)
 
             ],
           ),
