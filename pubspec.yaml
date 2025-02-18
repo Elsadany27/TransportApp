@@ -37,12 +37,9 @@ dependencies:
   flutter_bloc:
   mobile_scanner: ^6.0.6
   qr_code_scanner_plus: ^2.0.6
-  google_maps_flutter:
+#  google_maps_flutter:
   location_picker_flutter_map: ^3.0.1
-# For handling LatLng types
-
-
-
+  flutter_steps: ^1.0.5
 
 
 dev_dependencies:
