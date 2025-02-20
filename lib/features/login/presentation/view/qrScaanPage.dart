@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
+import 'package:trasportation/core/utilities/app_color.dart';
 
 import 'package:trasportation/core/utilities/app_images.dart';
 import 'package:trasportation/features/home/presentation/view/homepage.dart';
@@ -63,7 +64,7 @@ class _QrScaanPageState extends State<QrScaanPage> {
               actions: [
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.black,
                     padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.12, vertical: screenSize.height * 0.02),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),

@@ -23,12 +23,12 @@ class _SpalshScreenBodyState extends State<SpalshScreenBody> with SingleTickerPr
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.black,
         body: AnimatedBuilder(
         animation: _animationController,
         builder: (context, child) =>Center(
       child: AnimatedOpacity(
-          child: Image.asset(Assets.logo,height:screenSize.height*0.9,),
+          child: Image.asset(Assets.logo,height:screenSize.height*0.27),
           opacity: _animationController.value, duration: Duration(seconds: 3)),
     ),
     ));

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomeTextformfield extends StatelessWidget {
-   CustomeTextformfield({super.key,this.textt,required this.secure,this.controller,this.preicon,this.suffixicon,required this.ontap});
+   CustomeTextformfield({super.key,required this.type,this.textt,required this.secure,this.controller,this.preicon,this.suffixicon,required this.ontap});
   String? textt;
   TextEditingController? controller;
+   TextInputType? type;
   bool secure;
   Icon? preicon;
   IconData? suffixicon;
@@ -11,6 +12,7 @@ class CustomeTextformfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      keyboardType:type,
       obscureText:secure ,
        controller: controller,
       decoration: InputDecoration(

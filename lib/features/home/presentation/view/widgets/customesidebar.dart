@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trasportation/features/home/presentation/view%20model/homecubit.dart';
+import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
 import '../../../../../core/utilities/app_images.dart';
 import 'ImageWithTextSidebar.dart';
 import 'customecircleavatat.dart';
@@ -9,7 +12,9 @@ class CustomeSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => HomeCubit(),
+  child: Scaffold(
       body: Stack(
           children: [
             //bottom element (details of menu)
@@ -26,7 +31,7 @@ class CustomeSidebar extends StatelessWidget {
                 ),
               ),child: Column(children: [
               Container(
-                margin: EdgeInsets.only(top: screenSize.height*0.050,left: screenSize.width*0.010,bottom: screenSize.height*0.02),
+                margin: EdgeInsets.only(top: screenSize.height*0.050,left: screenSize.width*0.010,bottom: screenSize.height*0.08),
                 alignment: Alignment.center,
                 height:screenSize.height* 0.110,
                 width: screenSize.width,
@@ -35,45 +40,46 @@ class CustomeSidebar extends StatelessWidget {
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(100),bottomLeft: Radius.circular(100)),),
                 child: ListTile(
                   title:Text("يوسف",style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.035),textDirection: TextDirection.rtl,) ,
-                  trailing: CustomeCircleAvatar(image: "${Assets.admin}",),
+                  trailing: CustomeCircleAvatar(),
                   subtitle: Text("24225",style: TextStyle(color: Colors.white60),textDirection: TextDirection.rtl,),
                 ),),
 
               //properties
-              //
-              ImageWithTextMenu(image: "${Assets.edit}",text: "تغير الصورة",),
+              ImageWithTextMenu(ontap: (){
+                BlocProvider.of<HomeCubit>(context).editImage();
+              },image: "${Assets.edit}",text: "تغير الصورة",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-              ImageWithTextMenu(image: "${Assets.money}",text: "المرتب",),
+              ImageWithTextMenu(ontap: (){},image: "${Assets.money}",text: "المرتب",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-              ImageWithTextMenu(image: "${Assets.date}",text: "تواريخ الرحلات",),
+              ImageWithTextMenu(ontap: (){},image: "${Assets.date}",text: "تواريخ الرحلات",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-              ImageWithTextMenu(image: "${Assets.setting}",text: "الاعدادات",),
+              ImageWithTextMenu(ontap: (){},image: "${Assets.setting}",text: "الاعدادات",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
-
 
             ],),),
 
-            // Row(
-            //   crossAxisAlignment: CrossAxisAlignment.end,
-            //   mainAxisAlignment: MainAxisAlignment.end,
-            //   children: [
-            //     Image.asset(Assets.logo,height: screenSize.height*0.22,),SizedBox(width: screenSize.width*0.03,),
-            //     Container(
-            //       alignment: Alignment.topCenter,
-            //       padding: EdgeInsets.only(top:screenSize.height*0.1,left: screenSize.width*0.05,right: screenSize.width*0.05 ),
-            //       width: screenSize.width*0.17,
-            //       height: screenSize.height,
-            //       color: Colors.orange,
-            //       child:InkWell(
-            //           onTap: () =>Navigator.of(context).pop(),
-            //           child: Image.asset(Assets.loginimage,)),
-            //     ),
-            //   ],
-            // )
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.topCenter,
+                  padding: EdgeInsets.only(top:screenSize.height*0.1, ),
+                  width: screenSize.width*0.13,
+                  height: screenSize.height,
+                  color: Colors.orange,
+                  child:IconButton(onPressed: (){
+                    Navigator.of(context).pop();
+                  },icon:Icon(Icons.arrow_left,size: screenSize.width*0.14,)),
+                )],
+            ),
+            Container(margin: EdgeInsets.only(bottom: screenSize.height*0.04),alignment: Alignment.bottomLeft,child: Image.asset(Assets.logo,height: screenSize.height*0.25,)),
           ]),
-    );
+    ),
+
+);
   }
 }

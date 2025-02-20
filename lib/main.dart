@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +6,9 @@ import 'package:trasportation/features/home/presentation/view%20model/homecubit.
 import 'package:trasportation/features/login/presentation/view%20model/logincubit.dart';
 import 'package:trasportation/features/splashscreen/presentation/view/splashscreen.dart';
 
-main(){
+main()async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
