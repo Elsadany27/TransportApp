@@ -31,23 +31,33 @@ class HomeCubit extends Cubit<HomeState>{
   String? urlimage;
   String? im;
   File? file;
-  //images
-  editImage()async{
-    emit(IsloadingImage());
+
+  // Method to pick and upload the image
+  editImage() async {
+    emit(InitialState());
     final ImagePicker picker = ImagePicker();
-// Pick an image.
+    // Pick an image from gallery
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    // Capture a photo.
-    // final XFile? photo = await picker.pickImage(source: ImageSource.camera);
-    file=File(image!.path);
+    if (image == null) {
+      emit(FailureState(error: 'No image selected'));
+      return;
+    }
 
-    var imagename=basename(image.path);
+    file = File(image.path);
+    var imagename = basename(image.path);
 
-    var refimage=FirebaseStorage.instance.ref("Profile/TransportImages/$imagename");
-    await refimage.putFile(file!);
-    urlimage=await refimage.getDownloadURL();
-    im=urlimage;
-    print(im);
-    emit(DisplayImage());
+    try {
+      // Upload image to Firebase storage
+      var refimage = FirebaseStorage.instance.ref("Profile/TransportImages/$imagename");
+      await refimage.putFile(file!);
+
+      // Get download URL for the uploaded image
+      urlimage = await refimage.getDownloadURL();
+      im = urlimage;
+      print(im);
+      emit(DisplayImage()); // Image uploaded successfully
+    } catch (e) {
+      emit(FailureState(error: e.toString())); // Handle errors
+    }
   }
 }
