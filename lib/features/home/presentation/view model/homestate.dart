@@ -6,6 +6,12 @@ class ChangeState extends HomeState{}
 class UnchangeState extends HomeState{}
 
 //chnage image
-class DisplayImage extends HomeState{}
-class IsloadingImage extends HomeState{}
-class NormalImage extends HomeState{}
+class IsloadingImage extends HomeState {}
+
+class DisplayImage extends HomeState {}
+
+class FailureState extends HomeState {
+  final String error;
+  FailureState({required this.error});
+}
+class InitialState extends HomeState{}
