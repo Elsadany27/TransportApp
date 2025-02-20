@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trasportation/core/utilities/app_color.dart';
 
 class CustomeElevatedBustton extends StatelessWidget {
    CustomeElevatedBustton({super.key,this.textt,required this.ontap});
@@ -10,7 +11,7 @@ class CustomeElevatedBustton extends StatelessWidget {
 
     return  Padding(
       padding:  EdgeInsets.only(left: screenSize.width*0.06,right: screenSize.width*0.06,top: screenSize.height*0.05),
-      child: ElevatedButton(onPressed: ontap, child: Text("$textt",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),style: ElevatedButton.styleFrom(
+      child: ElevatedButton(onPressed: ontap, child: Text("$textt",style: TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize: screenSize.width*0.04),),style: ElevatedButton.styleFrom(
           backgroundColor: Colors.black,
           elevation: 30,
           shadowColor: Colors.black,

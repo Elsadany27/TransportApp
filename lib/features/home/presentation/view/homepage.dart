@@ -37,22 +37,27 @@ class HomePage extends StatelessWidget {
                         Text("${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day}",style: TextStyle(fontSize: screenSize.width*0.04,fontWeight: FontWeight.bold),)
                       ],
                     ),SizedBox(width: screenSize.width*0.01,),
-                    Center(child: BlocConsumer<HomeCubit, HomeState>(
-                      listener: (context, state) {},
-                      builder: (context, state) {
-                        return Text("رمسيس ==> التجمع الخامس",style: TextStyle(fontWeight: FontWeight.bold,fontSize: screenSize.width*0.04,color:BlocProvider.of<HomeCubit>(context).text=="انهاء الشيفت"? Colors.red:Colors.green,letterSpacing: 2.0));
-                      },
-                    )),
+                    Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        //buttons carta / petrol
+                        ActionsButtons(),
 
-                    //buttons carta / petrol
-                    ActionsButtons(),
+                        Center(child: BlocConsumer<HomeCubit, HomeState>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            return Text("رمسيس ==> التجمع الخامس",style: TextStyle(fontWeight: FontWeight.bold,fontSize: screenSize.width*0.04,color:BlocProvider.of<HomeCubit>(context).text=="انهاء الشيفت"? Colors.red:Colors.green,letterSpacing: 1.5));
+                          },
+                        )),
+                      ],
+                    ),
+
                     //step ponits
                     CustomeStepper(),
                     //map
                     CustomeMap(),
                     //search by
                     SizedBox(height: screenSize.height*0.02,),
-                    CustomeTextformfield(secure: false, ontap: (){},textt: "حدد منطقة البدايه",preicon: Icon(Icons.location_on_outlined),),
+                    CustomeTextformfield(type: TextInputType.text,secure: false, ontap: (){},textt: "حدد منطقة البدايه",preicon: Icon(Icons.location_on_outlined),),
                     SizedBox(height: screenSize.height*0.05,)
                   ],
                 ),

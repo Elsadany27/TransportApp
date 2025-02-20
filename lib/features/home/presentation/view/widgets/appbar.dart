@@ -28,7 +28,7 @@ class Appbar extends StatelessWidget {
       child: Column(crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ListTile(
-            trailing: CircleAvatar(radius: 25,backgroundImage: AssetImage(Assets.admin),backgroundColor: Colors.white,),
+            trailing: CircleAvatar(radius: 25,backgroundImage:BlocProvider.of<HomeCubit>(context).urlimage==null? AssetImage(Assets.admin):NetworkImage("${BlocProvider.of<HomeCubit>(context).urlimage}"),backgroundColor: Colors.white,),
             title: Text("مرحبا يوسف ..👋 ",style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.06,fontWeight: FontWeight.bold),textDirection: TextDirection.rtl,),
             subtitle: Text("اتمنى لك يوما سعيدا ",style: TextStyle(color: Colors.white70,fontSize: screenSize.width*0.04,fontWeight: FontWeight.w500),textDirection: TextDirection.rtl,),
             leading: IconButton(onPressed: (){

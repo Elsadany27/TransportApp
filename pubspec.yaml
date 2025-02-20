@@ -40,6 +40,10 @@ dependencies:
 #  google_maps_flutter:
   location_picker_flutter_map: ^3.0.1
   flutter_steps: ^1.0.5
+  image_picker:
+  cloud_firestore:
+  firebase_storage:
+  firebase_core:
 
 
 dev_dependencies:
