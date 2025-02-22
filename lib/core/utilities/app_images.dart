@@ -8,4 +8,6 @@ class Assets{
   static String date="images/assets/datee-removebg-preview.png";
   static String edit="images/assets/edit-removebg-preview.png";
   static String setting="images/assets/settings1-removebg-preview.png";
+  static String visa="images/assets/visalo-removebg-preview.png";
+  static String changepassword="images/assets/changepass-removebg-preview.png";
 }
