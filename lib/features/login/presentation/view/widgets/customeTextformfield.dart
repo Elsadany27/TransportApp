@@ -12,6 +12,11 @@ class CustomeTextformfield extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      validator: (value) {
+        if(value!.isEmpty){
+          return "الحقل فارغ";
+        }
+      },
       keyboardType:type,
       obscureText:secure ,
        controller: controller,

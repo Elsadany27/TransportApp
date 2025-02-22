@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:trasportation/core/utilities/app_images.dart';
+import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
 
 import '../../../data/data.dart';
 import '../widgets/customeappbarSidebar.dart';
@@ -16,18 +18,19 @@ class SalaryDetails extends StatelessWidget {
      SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
      SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
    ];
+
+   TextEditingController salarymonth=TextEditingController();
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(children: [
+      body: ListView(children: [
         //appbar
-        CustomeAppbarSidebar(texxt: "المرتب",color: Colors.black,),
-
+        CustomeAppbarSidebar(texxt: "الراتب",color: Colors.black,),
         //card Visa
         Container(
           width: double.infinity,
-          padding: EdgeInsets.only(left: screenSize.width*0.03,right: screenSize.width*0.03,top: screenSize.height*0.02),
+          padding: EdgeInsets.only(left: screenSize.width*0.02,right: screenSize.width*0.02,top: screenSize.height*0.01),
           margin: EdgeInsets.only(left: screenSize.width*0.03,right: screenSize.width*0.03,top: screenSize.height*0.05),
           height:screenSize.height*0.22,
           decoration: BoxDecoration(
@@ -44,8 +47,25 @@ class SalaryDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
 
-              Text("يوسف السعدنى ",textDirection: TextDirection.rtl,style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.06,fontWeight: FontWeight.bold),),
-              Text("24225",style: TextStyle(color: Colors.white70),textDirection: TextDirection.rtl,),
+              ListTile(
+                title:Text("يوسف السعدنى ",textDirection: TextDirection.rtl,style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.06,fontWeight: FontWeight.bold),),
+                subtitle:Text("24225",style: TextStyle(color: Colors.white70),textDirection: TextDirection.rtl,),
+                // leading: Card(child: Image.asset(Assets.visa,height: screenSize.height*0.04,),color: Colors.black,elevation: 40,shadowColor: Colors.white,),
+                leading: Container(
+                  height: screenSize.height*0.05,
+                  width: screenSize.width*0.2,
+                  decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white70,
+                          offset: const Offset(5.0, 15.0),
+                          blurRadius: 65.0,
+                          // spreadRadius: .0,
+                        ),
+                      ],
+                      image: DecorationImage(image: AssetImage(Assets.visa),fit: BoxFit.fill)),
+                ),
+              ),
               SizedBox(height: screenSize.height*0.035,),
 
               //total saraly
@@ -66,6 +86,11 @@ class SalaryDetails extends StatelessWidget {
           ),
         ),
 
+        //search
+        Padding(
+          padding:  EdgeInsets.only(right: screenSize.width*0.03,left: screenSize.width*0.03,top: screenSize.height*0.02),
+          child: CustomeTextformfield(controller: salarymonth,type: TextInputType.text, secure: false, ontap: (){},textt: "البحث عن شهر",preicon: Icon(Icons.search),),
+        ),
         //saraly months
         Container(
           margin: EdgeInsets.only(top: screenSize.height*0.05),

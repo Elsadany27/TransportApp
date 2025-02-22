@@ -4,6 +4,7 @@ import 'package:trasportation/features/home/presentation/view%20model/homecubit.
 import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
 import 'package:trasportation/features/home/presentation/view/sidebar/salarydetails.dart';
 import '../../../../../core/utilities/app_images.dart';
+import '../sidebar/changepassword.dart';
 import 'ImageWithTextSidebar.dart';
 import 'customecircleavatat.dart';
 import '../sidebar/journeyhistories.dart';
@@ -54,7 +55,7 @@ class CustomeSidebar extends StatelessWidget {
 
               ImageWithTextMenu(ontap: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => SalaryDetails(),));
-              },image: "${Assets.money}",text: "المرتب",),
+              },image: "${Assets.money}",text: "الراتب",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
               ImageWithTextMenu(ontap: (){
@@ -62,7 +63,9 @@ class CustomeSidebar extends StatelessWidget {
               },image: "${Assets.date}",text: "تواريخ الرحلات",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-              ImageWithTextMenu(ontap: (){},image: "${Assets.setting}",text: "الاعدادات",),
+              ImageWithTextMenu(ontap: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePassword(),));
+              },image: "${Assets.changepassword}",text: "تغير كلمة السر ",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
               ImageWithTextMenu(ontap: (){},image: "${Assets.date}",text: "نبذه عننا",),
