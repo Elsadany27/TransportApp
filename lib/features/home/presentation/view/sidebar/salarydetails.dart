@@ -3,7 +3,7 @@ import 'package:trasportation/core/utilities/app_images.dart';
 import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
 
 import '../../../data/data.dart';
-import '../widgets/customeappbarSidebar.dart';
+import '../../../../../core/utilities/component/customeappbarSidebar.dart';
 
 class SalaryDetails extends StatelessWidget {
    SalaryDetails({super.key});

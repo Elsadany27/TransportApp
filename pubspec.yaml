@@ -44,6 +44,9 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   firebase_core:
+  dio:
+  crypto:
+  http:
 
 
 dev_dependencies:

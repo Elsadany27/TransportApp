@@ -17,15 +17,17 @@ class CustomeTextformfield extends StatelessWidget {
           return "الحقل فارغ";
         }
       },
+      style: TextStyle(color: Colors.white),
       keyboardType:type,
       obscureText:secure ,
        controller: controller,
       decoration: InputDecoration(
         prefixIcon:preicon,
-        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20),borderSide: BorderSide(color: Colors.white60)),
+        focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20),borderSide: BorderSide(color: Colors.white60)),
         hintText: textt,
-        suffixIcon: IconButton(onPressed: ontap, icon: Icon(suffixicon))
+        hintStyle: TextStyle(color: Colors.white),
+        suffixIcon: IconButton(onPressed: ontap, icon: Icon(suffixicon),color: Colors.white,)
       ),
     );
   }
