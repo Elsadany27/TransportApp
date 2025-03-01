@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trasportation/core/utilities/app_images.dart';
 import 'package:trasportation/features/home/data/data.dart';
 
-import '../widgets/customeappbarSidebar.dart';
+import '../../../../../core/utilities/component/customeappbarSidebar.dart';
 
 class JourneyHistories extends StatelessWidget {
    JourneyHistories({super.key});

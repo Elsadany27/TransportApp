@@ -36,6 +36,7 @@
 import 'package:flutter/material.dart';
 import 'package:location_picker_flutter_map/location_picker_flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:trasportation/features/home/data/datasource.dart';
 
 class CustomeMap extends StatefulWidget {
   const CustomeMap({super.key});
@@ -46,6 +47,7 @@ class CustomeMap extends StatefulWidget {
 
 class _CustomeMapState extends State<CustomeMap> {
   LatLong? currentLocation;
+  // DataSource dataSource=DataSource();
 
   @override
   void initState() {
@@ -94,7 +96,8 @@ class _CustomeMapState extends State<CustomeMap> {
           // Print picked data to console
           print('Address: ${pickedData.address}');
           print('Country: ${pickedData.addressData['country']}');
-        },
+          print('Country: ${pickedData.latLong.latitude}');
+          },
       ),
     );
   }
