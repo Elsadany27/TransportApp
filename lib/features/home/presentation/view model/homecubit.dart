@@ -4,6 +4,8 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:trasportation/features/home/data/homedatasource.dart';
+import 'package:trasportation/features/home/data/model/model.dart';
 import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
 
 class HomeCubit extends Cubit<HomeState>{
@@ -12,6 +14,7 @@ class HomeCubit extends Cubit<HomeState>{
   //change color and text
   String text="ابدا الشيفت";
   Color color=Colors.red;
+
 
   changeText(){
     if(text=="ابدا الشيفت" && color==Colors.red){
@@ -60,4 +63,23 @@ class HomeCubit extends Cubit<HomeState>{
       emit(FailureState(error: e.toString())); // Handle errors
     }
   }
+
+  //route data
+  getRouteDriver(String email,String pass)async{
+    RouteModel? datta;
+    HomeDataSource homeDataSource=HomeDataSource();
+    emit(IsloadingRoute());
+    print(homeDataSource.idDriverr);
+    try{
+      datta=await homeDataSource.getRouteDriver(email, pass);
+      print(datta);
+      emit(SuccessRoute(data: datta));
+    }catch(e){
+      print(e);
+      emit(FailureRoute(errorMessage: e.toString()));
+    }
+
+  }
+
 }
+

@@ -1,31 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trasportation/core/constant/CustomeElevatedBustton.dart';
-import 'package:trasportation/core/utilities/component/customeappbarSidebar.dart';
+import 'package:trasportation/features/login/presentation/view%20model/loginstate.dart';
 import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
+
+import '../../../../core/utilities/component/customeappbarSidebar.dart';
+import '../view model/logincubit.dart';
 
 class ForgetPassword extends StatelessWidget {
    ForgetPassword({super.key});
 
+   TextEditingController password=TextEditingController();
    TextEditingController email=TextEditingController();
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => LoginCubit(),
+  child: Scaffold(
       backgroundColor: Colors.black,
-      body: Padding(
-        padding:  EdgeInsets.only(right:screenSize.width*0.02,left: screenSize.width*0.02,top: screenSize.height*0.02 ),
-        child: ListView(
-          children: [
-            //appbar
-            CustomeAppbarSidebar(texxt: "تعديل كلمة المرور",color: Colors.white,),
-            SizedBox(height: screenSize.height*0.06,),
-            //field
-            CustomeTextformfield(type: TextInputType.emailAddress, secure: false, ontap: (){},textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,),controller: email,),
-            //button
-            CustomeElevatedBustton(ontap: (){},textt: "التالى",color: Colors.white12,)
-          ],
-        ),
-      ),
-    );
+      body:ListView(children: [
+        //appbar
+        CustomeAppbarSidebar(texxt: "تعديل كلمة المرور",color: Colors.white,),
+        SizedBox(height: screenSize.height*0.06,),
+        //form
+        CustomeTextformfield(type: TextInputType.emailAddress, secure: false, ontap: (){},textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,),controller: email,),
+
+        Padding(
+          padding: EdgeInsets.only(left: screenSize.width*0.03,right: screenSize.width*0.03),
+          child: BlocConsumer<LoginCubit, LoginState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              return CustomeTextformfield(
+                type: TextInputType.text,
+                ontap: () {
+                  BlocProvider.of<LoginCubit>(context).changeState();
+                },
+                suffixicon: Icons.visibility_off,
+                secure: BlocProvider.of<LoginCubit>(context).statee,
+                textt: "كلمة السر",
+                preicon: Icon(Icons.lock_outline,color: Colors.white,),
+                controller: password,
+              );},
+          ),),
+        
+        //button
+        BlocBuilder<LoginCubit,LoginState>(builder: (context, state) {
+          if(state is IsLoadingResetPassword){
+            return CircleAvatar(radius: 25,backgroundColor: Colors.black,child: CircularProgressIndicator(color: Colors.red,),);
+          }
+          else{
+            return CustomeElevatedBustton(ontap: (){
+              BlocProvider.of<LoginCubit>(context).resetPassword(email:email.text.trim(),pass:password.text.trim(),context:context);
+            },color: Colors.white12,textt: "تغير كلمة السر",);
+          }
+        },)
+      ],) ,
+    ),
+);
   }
 }

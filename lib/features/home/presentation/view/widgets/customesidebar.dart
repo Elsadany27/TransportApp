@@ -40,7 +40,7 @@ class CustomeSidebar extends StatelessWidget {
                 width: screenSize.width,
                 decoration: BoxDecoration(
                   border: Border.all(width:screenSize.width*0.001,color: Colors.white),
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(100),bottomLeft: Radius.circular(100)),),
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(100),bottomRight: Radius.circular(100)),),
                 child: ListTile(
                   title:Text("يوسف",style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.035),textDirection: TextDirection.rtl,) ,
                   trailing: CustomeCircleAvatar(),
