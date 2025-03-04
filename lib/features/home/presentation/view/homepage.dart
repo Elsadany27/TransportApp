@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:trasportation/features/home/data/model/model.dart';
 import 'package:trasportation/features/home/presentation/view%20model/homecubit.dart';
 import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
 import 'package:trasportation/features/home/presentation/view/widgets/Customestepper.dart';
@@ -10,15 +11,19 @@ import 'package:trasportation/features/home/presentation/view/widgets/customeMap
 import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  HomePage({super.key,this.emaill,this.passs});
 
+  String? emaill,passs;
+  RouteModel? dataa=RouteModel();
   void _onLocationPicked(LatLng location) {
     print('Location picked: ${location.latitude}, ${location.longitude}');
   }
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => HomeCubit()..getRouteDriver(emaill.toString(), passs.toString()),
+  child: Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
@@ -41,7 +46,6 @@ class HomePage extends StatelessWidget {
                       children: [
                         //buttons carta / petrol
                         ActionsButtons(),
-
                         Center(child: BlocConsumer<HomeCubit, HomeState>(
                           listener: (context, state) {},
                           builder: (context, state) {
@@ -51,6 +55,26 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
 
+
+                    //test
+                    Container(
+                      height: screenSize.height*0.2,
+                      child: BlocBuilder<HomeCubit,HomeState>(builder: (context, state) {
+                        if(state is IsloadingRoute){
+                          return CircularProgressIndicator();
+                        }
+                        else if (state is SuccessRoute){
+                          dataa=state.data;
+                          return Text("${state.data!.result!.data!.driverName}");
+                        }
+                        else if(state is FailureRoute){
+                          return Text("${state.errorMessage}");
+                        }
+                        else{
+                          return Text("no data");
+                        }
+                      },),
+                    ),
                     //step ponits
                     CustomeStepper(),
                     //map
@@ -68,6 +92,9 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+);
   }
 }
+
+

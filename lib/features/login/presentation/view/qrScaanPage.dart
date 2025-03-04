@@ -7,45 +7,34 @@ import 'package:trasportation/features/login/presentation/view/widgets/contentof
 
 
 class QrScaanPage extends StatelessWidget {
+  QrScaanPage({super.key, this.email, this.pass});
 
+  String? email, pass;
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: Stack(
         children: [
           //container background
           Container(
-            decoration: BoxDecoration(image: DecorationImage(image: AssetImage(Assets.backgroundQR),fit: BoxFit.fill)),
+            decoration: BoxDecoration(image: DecorationImage(
+                image: AssetImage(Assets.backgroundQR), fit: BoxFit.fill)),
           ),
           //shadow Conrainer
           Container(color: Colors.black54,),
-
-          // Container border
-          // Container(
-          //   height: screenSize.height * 0.42,
-          //   decoration: BoxDecoration(
-          //     border: Border.all(width: 2, color: Colors.yellowAccent),
-          //     color: Color(0xffFAC649),
-          //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(screenSize.width * 0.55)),
-          //   ),
-          // ),
-          // Image
-          // Container(
-          //   height: screenSize.height * 0.41,
-          //   decoration: BoxDecoration(
-          //     color: Colors.red,
-          //     borderRadius: BorderRadius.only(bottomLeft: Radius.circular(screenSize.width * 0.55)),
-          //     image: DecorationImage(image: AssetImage(Assets.qrimage), fit: BoxFit.fill),
-          //   ),
-          // ),
-
           // Text and button
-          ContentOfPage()
+          ContentOfPage(email: email,password: pass,)
 
         ],
       ),
     );
   }
 }
+
+
+
+

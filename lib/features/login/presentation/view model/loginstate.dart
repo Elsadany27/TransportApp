@@ -12,3 +12,19 @@ class FailureState extends LoginState{
 
   FailureState({this.errorMessage});
 }
+
+//request pass
+class IsLoadingRequestPass extends LoginState{}
+class SuccessRequestPass extends LoginState{}
+class FailureRequestPass extends LoginState{
+  String? errorMessage;
+  FailureRequestPass({this.errorMessage});
+}
+
+//resetpassword
+class IsLoadingResetPassword extends LoginState{}
+class SuccessResetPassword extends LoginState{}
+class FailureResetPassword extends LoginState{
+  String? errorMessage;
+  FailureResetPassword({this.errorMessage});
+}

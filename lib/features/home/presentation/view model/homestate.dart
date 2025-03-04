@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trasportation/features/home/data/model/model.dart';
 
 abstract class HomeState{}
 //change color and text
@@ -15,3 +16,14 @@ class FailureState extends HomeState {
   FailureState({required this.error});
 }
 class InitialState extends HomeState{}
+
+//route
+class IsloadingRoute extends HomeState{}
+class SuccessRoute extends HomeState{
+  RouteModel? data;
+  SuccessRoute({required this.data});
+}
+class FailureRoute extends HomeState{
+  String? errorMessage;
+  FailureRoute({required this.errorMessage});
+}

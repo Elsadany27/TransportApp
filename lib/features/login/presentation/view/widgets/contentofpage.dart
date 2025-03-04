@@ -5,7 +5,9 @@ import 'package:trasportation/features/home/presentation/view/homepage.dart';
 import '../../../../../core/utilities/app_images.dart';
 
 class ContentOfPage extends StatefulWidget {
-  const ContentOfPage({super.key});
+  ContentOfPage({super.key, this.email, this.password});
+  final String? email;
+  final String? password;
 
   @override
   State<ContentOfPage> createState() => _ContentOfPageState();
@@ -78,7 +80,12 @@ class _ContentOfPageState extends State<ContentOfPage> {
 
                 // Navigate to HomePage
                 Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(
+                      emaill: widget.email, // Pass the email to HomePage
+                      passs: widget.password, // Pass the password to HomePage
+                    ),
+                  ),
                       (route) => false,
                 );
               },
@@ -122,20 +129,21 @@ class _ContentOfPageState extends State<ContentOfPage> {
                     onPressed: () {
                       // Open the QR scanner when the button is clicked
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => QRView(
-                              key: qrKey,
-                              onQRViewCreated: _onQRViewCreated,
-                              overlay: QrScannerOverlayShape(
-                                borderColor: Colors.blue,
-                                borderRadius: 10,
-                                borderLength: 30,
-                                borderWidth: 10,
-                                cutOutSize: screenSize.width * 0.8,
-                              ),
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QRView(
+                            key: qrKey,
+                            onQRViewCreated: _onQRViewCreated,
+                            overlay: QrScannerOverlayShape(
+                              borderColor: Colors.blue,
+                              borderRadius: 10,
+                              borderLength: 30,
+                              borderWidth: 10,
+                              cutOutSize: screenSize.width * 0.8,
                             ),
-                          ));
+                          ),
+                        ),
+                      );
                     },
                     icon: Icon(Icons.qr_code, size: screenSize.height * 0.2, color: Colors.white), // QR Button icon
                   ),
