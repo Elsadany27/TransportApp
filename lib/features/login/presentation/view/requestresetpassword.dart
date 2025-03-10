@@ -25,7 +25,7 @@ class RequestResetPassword extends StatelessWidget {
             CustomeAppbarSidebar(texxt: "تعديل كلمة المرور",color: Colors.white,),
             SizedBox(height: screenSize.height*0.06,),
             //field
-            CustomeTextformfield(type: TextInputType.emailAddress, secure: false, ontap: (){},textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,),controller: email,),
+            CustomeTextformfield(hintstyle: TextStyle(color: Colors.white),styleTextColor: Colors.white,borderColor: Colors.white38,type: TextInputType.emailAddress, secure: false, ontap: (){},textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,),controller: email,),
             //button
             BlocBuilder<LoginCubit,LoginState>(builder: (context, state) {
               if(state is IsLoadingRequestPass){

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trasportation/core/utilities/app_images.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homecubit.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
+import 'package:trasportation/features/home/presentation/view%20model/homecubit/homecubit.dart';
+import '../../view model/homecubit/homestate.dart';
 
 class CustomeCircleAvatar extends StatelessWidget {
   CustomeCircleAvatar({super.key});

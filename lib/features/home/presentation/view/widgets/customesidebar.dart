@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homecubit.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
+import 'package:trasportation/features/home/data/model/driver_model.dart';
+import 'package:trasportation/features/home/presentation/view%20model/homecubit/homecubit.dart';
 import 'package:trasportation/features/home/presentation/view/sidebar/salarydetails.dart';
+import 'package:trasportation/features/login/presentation/view/requestresetpassword.dart';
 import '../../../../../core/utilities/app_images.dart';
-import '../sidebar/changepassword.dart';
+import '../../view model/homecubit/homestate.dart';
 import 'ImageWithTextSidebar.dart';
-import 'customecircleavatat.dart';
 import '../sidebar/journeyhistories.dart';
 
 class CustomeSidebar extends StatelessWidget {
-  CustomeSidebar({super.key,this.name,this.code});
-  String? name,code;
+  CustomeSidebar({super.key,this.passSide,this.emailside});
+  String? emailside,passSide;
+  DriverModel? dataaDriver;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
-  create: (context) => HomeCubit(),
+  create: (context) => HomeCubit()..getDriverInfo(emailside!, passSide!),
   child: Scaffold(
       body: Stack(
           children: [
@@ -41,11 +42,23 @@ class CustomeSidebar extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(width:screenSize.width*0.001,color: Colors.white),
                   borderRadius: BorderRadius.only(topRight: Radius.circular(100),bottomRight: Radius.circular(100)),),
-                child: ListTile(
-                  title:Text("يوسف",style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.035),textDirection: TextDirection.rtl,) ,
-                  trailing: CustomeCircleAvatar(),
-                  subtitle: Text("24225",style: TextStyle(color: Colors.white60),textDirection: TextDirection.rtl,),
-                ),),
+                child: BlocBuilder<HomeCubit,HomeState>(builder: (context, state) {
+                  if(state is IsloadingDriverInfo){
+                    return CircleAvatar(backgroundColor: Colors.black,radius: 20,child: CircularProgressIndicator(backgroundColor: Colors.red,),);
+                  }
+                  else if (state is SuccessDriverInfo){
+                    dataaDriver=state.driverData!;
+                    return ListTile(
+                      title:Text("${dataaDriver!.result!.user!.name}",style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.035),textDirection: TextDirection.rtl,) ,
+                      // trailing: CustomeCircleAvatar(),
+                      subtitle: Text("${dataaDriver!.result!.user!.email}",style: TextStyle(color: Colors.white60),textDirection: TextDirection.rtl,),
+                    );
+                  }
+                  else{
+                    return Text("no data");
+                  }
+                },)
+              ),
 
               //properties
               ImageWithTextMenu(ontap: (){
@@ -54,7 +67,7 @@ class CustomeSidebar extends StatelessWidget {
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
               ImageWithTextMenu(ontap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SalaryDetails(),));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SalaryDetails(email: emailside,pass: passSide,),));
               },image: "${Assets.money}",text: "الراتب",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
@@ -64,7 +77,7 @@ class CustomeSidebar extends StatelessWidget {
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
               ImageWithTextMenu(ontap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ChangePassword(),));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => RequestResetPassword(),));
               },image: "${Assets.changepassword}",text: "تغير كلمة السر ",),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:trasportation/features/home/data/model/model.dart';
+import 'package:trasportation/features/home/data/model/driver_model.dart';
+import 'package:trasportation/features/home/data/model/routes_model.dart';
 
 abstract class HomeState{}
 //change color and text
@@ -26,4 +27,15 @@ class SuccessRoute extends HomeState{
 class FailureRoute extends HomeState{
   String? errorMessage;
   FailureRoute({required this.errorMessage});
+}
+//drover info
+
+class IsloadingDriverInfo extends HomeState{}
+class SuccessDriverInfo extends HomeState{
+  DriverModel? driverData;
+  SuccessDriverInfo({required this.driverData});
+}
+class FailureDriverInfo extends HomeState{
+  String? errorMessage;
+  FailureDriverInfo({this.errorMessage});
 }

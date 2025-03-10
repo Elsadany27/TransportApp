@@ -24,14 +24,18 @@ class ForgetPassword extends StatelessWidget {
         CustomeAppbarSidebar(texxt: "تعديل كلمة المرور",color: Colors.white,),
         SizedBox(height: screenSize.height*0.06,),
         //form
-        CustomeTextformfield(type: TextInputType.emailAddress, secure: false, ontap: (){},textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,),controller: email,),
-
+        Padding(
+          padding:EdgeInsets.only(left: screenSize.width*0.03,right: screenSize.width*0.03),
+          child: CustomeTextformfield(hintstyle: TextStyle(color: Colors.white),styleTextColor: Colors.white,borderColor: Colors.white38,type: TextInputType.emailAddress, secure: false, ontap: (){},textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,),controller: email,),
+        ),
+SizedBox(height: screenSize.height*0.02,),
         Padding(
           padding: EdgeInsets.only(left: screenSize.width*0.03,right: screenSize.width*0.03),
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {},
             builder: (context, state) {
               return CustomeTextformfield(
+                hintstyle: TextStyle(color: Colors.white),styleTextColor: Colors.white,borderColor: Colors.white38,
                 type: TextInputType.text,
                 ontap: () {
                   BlocProvider.of<LoginCubit>(context).changeState();
