@@ -4,9 +4,11 @@ import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:trasportation/features/home/data/homedatasource.dart';
-import 'package:trasportation/features/home/data/model/model.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
+import 'package:trasportation/features/home/data/model/driver_model.dart';
+import 'package:trasportation/features/home/data/model/routes_model.dart';
+
+import '../../../data/datasource/homedatasource.dart';
+import 'homestate.dart';
 
 class HomeCubit extends Cubit<HomeState>{
   HomeCubit():super(ChangeState());
@@ -78,7 +80,21 @@ class HomeCubit extends Cubit<HomeState>{
       print(e);
       emit(FailureRoute(errorMessage: e.toString()));
     }
+  }
 
+  //get driver info
+  getDriverInfo(String mail,String password)async{
+    DriverModel? dataDriver;
+    HomeDataSource _homeDataSorurce=HomeDataSource();
+    emit(IsloadingDriverInfo());
+    try{
+      dataDriver=await _homeDataSorurce.getDriverInfo(mail, password);
+      print(dataDriver);
+      emit(SuccessDriverInfo(driverData: dataDriver));
+    }catch(e){
+      print(e);
+      emit(FailureDriverInfo(errorMessage: e.toString()));
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 class RouteModel {
   String? jsonrpc;
-  dynamic id; // Change this to dynamic or appropriate type
+  dynamic id; // Can be changed to a more specific type if needed
   Result? result;
 
   RouteModel({this.jsonrpc, this.id, this.result});
@@ -46,7 +46,7 @@ class Result {
 class Data {
   int? driverId;
   String? driverName;
-  List<Route>? routes; // Assuming Route is a defined class
+  List<Route>? routes;
 
   Data({this.driverId, this.driverName, this.routes});
 
@@ -56,7 +56,7 @@ class Data {
     if (json['routes'] != null) {
       routes = <Route>[];
       json['routes'].forEach((v) {
-        routes!.add(Route.fromJson(v)); // Assuming Route has fromJson
+        routes!.add(Route.fromJson(v));
       });
     }
   }
@@ -72,19 +72,19 @@ class Data {
   }
 }
 
-class Routes {
+class Route {
   int? planningId;
-  Route? route;
+  RouteDetails? route;
   Bus? bus;
   String? date;
   String? startTime;
   String? endTime;
 
-  Routes({this.planningId, this.route, this.bus, this.date, this.startTime, this.endTime});
+  Route({this.planningId, this.route, this.bus, this.date, this.startTime, this.endTime});
 
-  Routes.fromJson(Map<String, dynamic> json) {
+  Route.fromJson(Map<String, dynamic> json) {
     planningId = json['planning_id'];
-    route = json['route'] != null ? Route.fromJson(json['route']) : null;
+    route = json['route'] != null ? RouteDetails.fromJson(json['route']) : null;
     bus = json['bus'] != null ? Bus.fromJson(json['bus']) : null;
     date = json['date'];
     startTime = json['start_time'];
@@ -107,20 +107,20 @@ class Routes {
   }
 }
 
-class Route {
+class RouteDetails {
   int? id;
   String? name;
-  List<Point>? points; // Change Null to Point or whatever type
+  List<Point>? points; // Assuming Point is defined elsewhere
 
-  Route({this.id, this.name, this.points});
+  RouteDetails({this.id, this.name, this.points});
 
-  Route.fromJson(Map<String, dynamic> json) {
+  RouteDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     if (json['points'] != null) {
       points = <Point>[];
       json['points'].forEach((v) {
-        points!.add(Point.fromJson(v)); // Assuming Point has fromJson
+        points!.add(Point.fromJson(v)); // Ensure Point class exists
       });
     }
   }
@@ -132,25 +132,6 @@ class Route {
     if (this.points != null) {
       data['points'] = this.points!.map((v) => v.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class Point { // Define a Point class or appropriate type
-  double? latitude;
-  double? longitude;
-
-  Point({this.latitude, this.longitude});
-
-  Point.fromJson(Map<String, dynamic> json) {
-    latitude = json['latitude'];
-    longitude = json['longitude'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
     return data;
   }
 }
@@ -170,6 +151,25 @@ class Bus {
     final Map<String, dynamic> data = {};
     data['id'] = this.id;
     data['name'] = this.name;
+    return data;
+  }
+}
+
+class Point { // Define the Point class as needed
+  double? latitude;
+  double? longitude;
+
+  Point({this.latitude, this.longitude});
+
+  Point.fromJson(Map<String, dynamic> json) {
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['latitude'] = this.latitude;
+    data['longitude'] = this.longitude;
     return data;
   }
 }

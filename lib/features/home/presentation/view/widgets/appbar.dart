@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homecubit.dart';
-import 'package:trasportation/features/home/presentation/view%20model/homestate.dart';
-
-import '../../../../../core/utilities/app_images.dart';
+import 'package:trasportation/features/home/data/model/driver_model.dart';
+import 'package:trasportation/features/home/presentation/view%20model/homecubit/homecubit.dart';
+import '../../../data/datasource/homedatasource.dart';
+import '../../view model/homecubit/homestate.dart';
 import 'customesidebar.dart';
 
 class Appbar extends StatelessWidget {
-  const Appbar({super.key});
+   Appbar({super.key,this.passdriver,this.emaildriver});
+    String? emaildriver,passdriver;
+    DriverModel driverDataa=DriverModel();
 
   @override
   Widget build(BuildContext context) {
+    HomeDataSource homeDataSource=HomeDataSource();
     final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => HomeCubit(),
+      create: (context) => HomeCubit()..getDriverInfo(emaildriver ?? '', passdriver ?? ''),
       child: Container(
         padding: EdgeInsets.only(
             top: screenSize.height * 0.02,
@@ -36,67 +39,32 @@ class Appbar extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ListTile(
-              trailing: BlocBuilder<HomeCubit, HomeState>(
-                builder: (context, state) {
-                  if (state is IsloadingImage) {
-                    // Show a loading indicator while the image is loading
-                    return CircleAvatar(
-                      radius: 30,
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is DisplayImage) {
-                    // Display the uploaded image
-                    return CircleAvatar(
-                      radius: 25,
-                      backgroundImage: NetworkImage(
-                          "${BlocProvider.of<HomeCubit>(context).urlimage}"),
-                      backgroundColor: Colors.white,
-                    );
-                  } else if (state is FailureState) {
-                    // Show a failure message if the image upload fails
-                    return Text(
-                      "Fail",
-                      style: TextStyle(color: Colors.red),
-                    );
-                  } else {
-                    // Show a default image if no image has been uploaded
-                    return CircleAvatar(
-                      radius: 25,
-                      backgroundImage: AssetImage(Assets.admin),
-                    );
-                  }
-                },
-              ),
-              title: Text(
-                "مرحبا يوسف ..👋 ",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: screenSize.width * 0.06,
-                    fontWeight: FontWeight.bold),
-                textDirection: TextDirection.rtl,
-              ),
-              subtitle: Text(
-                "اتمنى لك يوما سعيدا ",
-                style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: screenSize.width * 0.04,
-                    fontWeight: FontWeight.w500),
-                textDirection: TextDirection.rtl,
-              ),
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => CustomeSidebar(),
-                  ));
-                },
-                icon: Icon(
-                  Icons.horizontal_split_outlined,
-                  color: Colors.white,
-                ),
-              ),
-              isThreeLine: true,
-            ),
+           BlocBuilder<HomeCubit,HomeState>(builder: (context, state){
+             if(state is IsloadingDriverInfo){
+               return CircleAvatar(child: CircularProgressIndicator(color: Colors.red,),radius: 10,backgroundColor: Colors.black,);
+             }
+             else if (state is SuccessDriverInfo){
+               driverDataa=state.driverData!;
+               return  ListTile(
+                 // title: Text("مرحبا يوسف ..👋 ",style: TextStyle(color: Colors.white,fontSize: screenSize.width * 0.06,fontWeight: FontWeight.bold), textDirection: TextDirection.rtl,),
+                 title: Text("${driverDataa.result!.user!.name} ..👋",style: TextStyle(color: Colors.white,fontSize: screenSize.width * 0.06,fontWeight: FontWeight.bold), textDirection: TextDirection.rtl,),
+                 subtitle: Text("اتمنى لك يوما سعيدا ", style: TextStyle(color: Colors.white70,fontSize: screenSize.width * 0.04,fontWeight: FontWeight.w500),textDirection: TextDirection.rtl,),
+                 leading: IconButton(
+                   onPressed: () {
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CustomeSidebar(emailside: emaildriver,passSide: passdriver,),));
+                   },
+                   icon: Icon(Icons.horizontal_split_outlined,color: Colors.white,),
+                 ),
+                 isThreeLine: true,
+               );
+             }
+             else if(state is FailureDriverInfo){
+               return Text("${state.errorMessage}",style: TextStyle(color: Colors.black),);
+             }
+             else{
+               return Text("no data",style: TextStyle(color: Colors.black),);
+             }
+           },)
           ],
         ),
       ),

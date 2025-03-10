@@ -48,12 +48,14 @@ class LoginPage extends StatelessWidget {
                     Text("قم بتسجيل الدخول , لتبدا رحلتك", style: TextStyle(fontSize: screenSize.width * 0.045, fontWeight: FontWeight.w500, color: Colors.white60), textDirection: TextDirection.rtl,),
                     SizedBox(height: screenSize.height * 0.05),
                     // Form
-                    CustomeTextformfield(type: TextInputType.text, ontap: () {}, secure: false, textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,), controller: email,),
+                    CustomeTextformfield(borderColor: Colors.white38,hintstyle: TextStyle(color: Colors.white),styleTextColor: Colors.white,type: TextInputType.text, ontap: () {}, secure: false, textt: "البريد الالكترونى",preicon: Icon(Icons.email_outlined,color: Colors.white,), controller: email,),
                     SizedBox(height: screenSize.height * 0.03),
                     BlocConsumer<LoginCubit, LoginState>(
                       listener: (context, state) {},
                       builder: (context, state) {
                         return CustomeTextformfield(
+                          hintstyle: TextStyle(color: Colors.white),styleTextColor: Colors.white,
+                          borderColor: Colors.white38,
                           type: TextInputType.text,
                           ontap: () {
                             BlocProvider.of<LoginCubit>(context).changeState();
