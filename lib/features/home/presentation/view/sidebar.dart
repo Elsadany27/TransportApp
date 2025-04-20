@@ -69,6 +69,7 @@ class CustomeSidebar extends StatelessWidget {
               },image: "${Assets.money}",text: "الراتب",himage: screenSize.height*0.04,wimage: screenSize.width*0.15,),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
+
               // ImageWithTextMenu(ontap: (){
               //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => JourneyHistories(),));
               // },image: "${Assets.date}",text: "تواريخ الرحلات",),
