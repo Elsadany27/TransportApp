@@ -69,12 +69,6 @@ class CustomeSidebar extends StatelessWidget {
               },image: "${Assets.money}",text: "الراتب",himage: screenSize.height*0.04,wimage: screenSize.width*0.15,),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-
-              // ImageWithTextMenu(ontap: (){
-              //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => JourneyHistories(),));
-              // },image: "${Assets.date}",text: "تواريخ الرحلات",),
-              // Divider(height: screenSize.height*0.01,color: Colors.white),
-
               ImageWithTextMenu(ontap: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => RequestResetPassword(),));
               },image: "${Assets.changepassword}",text: "تغير كلمة السر ",himage: screenSize.height*0.04,wimage: screenSize.width*0.12),
@@ -98,9 +92,7 @@ class CustomeSidebar extends StatelessWidget {
                   width: screenSize.width*0.13,
                   height: screenSize.height,
                   color: Colors.orange,
-                  child:IconButton(onPressed: (){
-                    Navigator.of(context).pop();
-                  },icon:Icon(Icons.arrow_left,size: screenSize.width*0.14,)),
+                  child:IconButton(onPressed: (){Navigator.of(context).pop();},icon:Icon(Icons.arrow_left,size: screenSize.width*0.14,)),
                 )],
             ),
             Container(margin: EdgeInsets.only(bottom: screenSize.height*0.04),alignment: Alignment.bottomLeft,child: Image.asset(Assets.logo,height: screenSize.height*0.25,)),
