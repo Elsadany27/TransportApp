@@ -28,13 +28,12 @@ class _ActionsButtonsState extends State<ActionsButtons> {
                 children: [
                   Row(
                     children: [
-                      Expanded(child: CustomeTextformfield(controller: money,type: TextInputType.number,ontap: (){},secure: false,textt: " المبلغ ",)),SizedBox(width: screenSize.width*0.01,),
-                      Expanded(child: CustomeTextformfield(controller: litter,type: TextInputType.number,ontap: (){},secure: false,textt: " اللترات",)),
+                      Expanded(child: CustomeTextformfield(textt: "المبلغ", type: TextInputType.number, secure: false, ontap: () {}, preicon: Icon(Icons.attach_money_outlined, color: Colors.black), borderColor: Colors.black, hintstyle: TextStyle(color: Colors.black), styleTextColor: Colors.black,)),
                     ],
                   ),
                   SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      child: CustomeElevatedBustton(ontap: (){},textt: "ادخال",))
+                      child: CustomeElevatedBustton(ontap: (){},textt: "ادخال",color: Colors.black,))
                 ],
               ),
             ),),);

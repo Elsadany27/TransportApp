@@ -121,7 +121,7 @@ class LoginCubit extends Cubit<LoginState> {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("تم تسجيل الدخول بنجاح"))); // Successful login message
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => QrScaanPage(email: email,pass: pass,)), (route) => false);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("كلمة المرور او الاكونت خطا"))); // Successful login message
+        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("كلمة المرور او الاكونت خطا"))); // Successful login message
         emit(FailureState(errorMessage: "Failed to login")); // Provide clearer feedback
       }
     } catch (e) {

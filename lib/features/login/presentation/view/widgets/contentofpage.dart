@@ -55,9 +55,7 @@ class _ContentOfPageState extends State<ContentOfPage> {
       barrierDismissible: false, // Prevent dismissing by tapping outside
       builder: (BuildContext context) {
         final screenSize = MediaQuery.of(context).size;
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        return AlertDialog(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           title: Text("تمت بنجاح", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: screenSize.width * 0.065)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -68,26 +66,12 @@ class _ContentOfPageState extends State<ContentOfPage> {
             ],
           ),
           actions: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.12, vertical: screenSize.height * 0.02),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-              ),
+            ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: Colors.black, padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.12, vertical: screenSize.height * 0.02), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),),
               onPressed: () {
                 // Print the QR code result
                 print(qrCodeResult);
-
                 // Navigate to HomePage
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(
-                      emaill: widget.email, // Pass the email to HomePage
-                      passs: widget.password, // Pass the password to HomePage
-                    ),
-                  ),
-                      (route) => false,
-                );
+                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => HomePage(emaill: widget.email,),),(route) => false,);
               },
               child: Text("استمرار", style: TextStyle(fontSize: screenSize.width * 0.04, color: Colors.white)),
             ),
@@ -107,8 +91,7 @@ class _ContentOfPageState extends State<ContentOfPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: screenSize.height * 0.15),
+          Padding(padding: EdgeInsets.only(top: screenSize.height * 0.15),
             child: Image.asset(Assets.logo, height: screenSize.height * 0.15),
           ),
           // Text description and button to open scanner
@@ -118,22 +101,13 @@ class _ContentOfPageState extends State<ContentOfPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  "قم بالضغط على QR\n لتحصل على مسارك و تبدأ رحلتك",
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: screenSize.width * 0.05, color: Colors.white60),
-                  textDirection: TextDirection.rtl,
-                ),
+                Text("قم بالضغط على QR\n لتحصل على مسارك و تبدأ رحلتك", style: TextStyle(fontWeight: FontWeight.w400, fontSize: screenSize.width * 0.05, color: Colors.white60), textDirection: TextDirection.rtl,),
                 // Button to open scanner
                 Center(
                   child: IconButton(
                     onPressed: () {
                       // Open the QR scanner when the button is clicked
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QRView(
-                            key: qrKey,
-                            onQRViewCreated: _onQRViewCreated,
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => QRView(key: qrKey, onQRViewCreated: _onQRViewCreated,
                             overlay: QrScannerOverlayShape(
                               borderColor: Colors.blue,
                               borderRadius: 10,
