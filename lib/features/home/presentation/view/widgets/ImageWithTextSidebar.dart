@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 
 class ImageWithTextMenu extends StatelessWidget {
-  ImageWithTextMenu({super.key, this.image, this.text,required this.ontap});
+  ImageWithTextMenu({super.key, this.image, this.text,required this.ontap,this.himage,this.wimage});
 
   final String? text;
   final String? image;
+  double? himage,wimage;
   final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
@@ -18,12 +19,9 @@ class ImageWithTextMenu extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text("$text",style: TextStyle(fontWeight: FontWeight.w400,fontSize: screenSize.width*0.04,
-              color: Colors.white,
-            ),
-            ),
+            Text("$text",style: TextStyle(fontWeight: FontWeight.w400,fontSize: screenSize.width*0.04, color: Colors.white,),),
             SizedBox(width:screenSize.width* 0.05),
-            Image.asset("$image",height: screenSize.height*0.04,color: Colors.white,),
+            Image.asset("$image",height: himage,width: wimage,color: Colors.white,),
 
           ],
         ),

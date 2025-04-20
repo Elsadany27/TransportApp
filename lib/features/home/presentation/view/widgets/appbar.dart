@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trasportation/core/widgets/custome_loading_indicator.dart';
 import 'package:trasportation/features/home/data/model/driver_model.dart';
 import 'package:trasportation/features/home/presentation/view%20model/homecubit/homecubit.dart';
 import '../../../data/datasource/homedatasource.dart';
 import '../../view model/homecubit/homestate.dart';
-import 'customesidebar.dart';
+import '../sidebar.dart';
 
 class Appbar extends StatelessWidget {
    Appbar({super.key,this.passdriver,this.emaildriver});
@@ -41,7 +42,7 @@ class Appbar extends StatelessWidget {
           children: [
            BlocBuilder<HomeCubit,HomeState>(builder: (context, state){
              if(state is IsloadingDriverInfo){
-               return CircleAvatar(child: CircularProgressIndicator(color: Colors.red,),radius: 10,backgroundColor: Colors.black,);
+               return Center(child: const CustomeLoadingIndicator());
              }
              else if (state is SuccessDriverInfo){
                driverDataa=state.driverData!;

@@ -13,17 +13,12 @@ class QrScaanPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery
-        .of(context)
-        .size;
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
           //container background
-          Container(
-            decoration: BoxDecoration(image: DecorationImage(
-                image: AssetImage(Assets.backgroundQR), fit: BoxFit.fill)),
-          ),
+          Container(decoration: BoxDecoration(image: DecorationImage(image: AssetImage(Assets.backgroundQR), fit: BoxFit.fill)),),
           //shadow Conrainer
           Container(color: Colors.black54,),
           // Text and button

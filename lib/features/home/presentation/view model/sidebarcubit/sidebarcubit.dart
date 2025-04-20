@@ -8,12 +8,12 @@ class SideBarCubit extends Cubit<SideBarState>{
   SideBarCubit():super(InitialState());
   PyrollDriverModel? driverPayroll;
 
-  getDriverPayroll(String email,String pass)async{
+  getDriverPayroll(String email,String pass,context)async{
     PyrollDriverModel? datta;
     PayrollDataSource payrollDataSource=PayrollDataSource();
     emit(IsloadingPyroll());
     try{
-      datta=await payrollDataSource.getPayrollDriver(email, pass);
+      datta=await payrollDataSource.getPayrollDriver(email, pass,context);
       print(datta);
       emit(SuccessPyroll(data: datta));
     }catch(e){

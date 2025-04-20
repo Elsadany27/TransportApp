@@ -5,6 +5,7 @@ import 'package:trasportation/features/login/presentation/view%20model/loginstat
 import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
 
 import '../../../../core/utilities/component/customeappbarSidebar.dart';
+import '../../../../core/widgets/custome_loading_indicator.dart';
 import '../view model/logincubit.dart';
 
 class ForgetPassword extends StatelessWidget {
@@ -47,11 +48,14 @@ SizedBox(height: screenSize.height*0.02,),
                 controller: password,
               );},
           ),),
-        
+
         //button
         BlocBuilder<LoginCubit,LoginState>(builder: (context, state) {
           if(state is IsLoadingResetPassword){
-            return CircleAvatar(radius: 25,backgroundColor: Colors.black,child: CircularProgressIndicator(color: Colors.red,),);
+            return const CustomeLoadingIndicator();
+          }
+          else if (state is FailureResetPassword){
+            return Center(child: Text("There is fail,please try again"));
           }
           else{
             return CustomeElevatedBustton(ontap: (){

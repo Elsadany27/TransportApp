@@ -12,4 +12,6 @@ class Assets{
   static String changepassword="images/assets/changepass-removebg-preview.png";
   static String backgroundLogin="images/assets/74_3_de87986649ef_o.jpg";
   static String backgroundQR="images/assets/673.jpg";
+
+  static String logout="images/assets/logout-removebg-preview.png";
 }

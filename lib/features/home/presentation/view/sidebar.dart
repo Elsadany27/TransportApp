@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:trasportation/core/widgets/custome_loading_indicator.dart';
 import 'package:trasportation/features/home/data/model/driver_model.dart';
 import 'package:trasportation/features/home/presentation/view%20model/homecubit/homecubit.dart';
+import 'package:trasportation/features/home/presentation/view/sidebar/about_us_page.dart';
 import 'package:trasportation/features/home/presentation/view/sidebar/salarydetails.dart';
+import 'package:trasportation/features/login/presentation/view/loginpage.dart';
 import 'package:trasportation/features/login/presentation/view/requestresetpassword.dart';
-import '../../../../../core/utilities/app_images.dart';
-import '../../view model/homecubit/homestate.dart';
-import 'ImageWithTextSidebar.dart';
-import '../sidebar/journeyhistories.dart';
+import '../../../../core/utilities/app_images.dart';
+import '../view model/homecubit/homestate.dart';
+import 'widgets/ImageWithTextSidebar.dart';
+import 'sidebar/journeyhistories.dart';
 
 class CustomeSidebar extends StatelessWidget {
   CustomeSidebar({super.key,this.passSide,this.emailside});
@@ -35,16 +38,16 @@ class CustomeSidebar extends StatelessWidget {
                 ),
               ),child: Column(children: [
               Container(
-                margin: EdgeInsets.only(top: screenSize.height*0.050,left: screenSize.width*0.010,bottom: screenSize.height*0.08),
+                margin: EdgeInsets.only(top: screenSize.height*0.050,left: screenSize.width*0.010,bottom: screenSize.height*0.05),
                 alignment: Alignment.center,
-                height:screenSize.height* 0.110,
+                height:screenSize.height* 0.1,
                 width: screenSize.width,
                 decoration: BoxDecoration(
                   border: Border.all(width:screenSize.width*0.001,color: Colors.white),
                   borderRadius: BorderRadius.only(topRight: Radius.circular(100),bottomRight: Radius.circular(100)),),
                 child: BlocBuilder<HomeCubit,HomeState>(builder: (context, state) {
                   if(state is IsloadingDriverInfo){
-                    return CircleAvatar(backgroundColor: Colors.black,radius: 20,child: CircularProgressIndicator(backgroundColor: Colors.red,),);
+                    return const Center(child:const CustomeLoadingIndicator());
                   }
                   else if (state is SuccessDriverInfo){
                     dataaDriver=state.driverData!;
@@ -62,26 +65,24 @@ class CustomeSidebar extends StatelessWidget {
 
               //properties
               ImageWithTextMenu(ontap: (){
-                BlocProvider.of<HomeCubit>(context).editImage();
-              },image: "${Assets.edit}",text: "تغير الصورة",),
-              Divider(height: screenSize.height*0.01,color: Colors.white),
-
-              ImageWithTextMenu(ontap: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => SalaryDetails(email: emailside,pass: passSide,),));
-              },image: "${Assets.money}",text: "الراتب",),
+              },image: "${Assets.money}",text: "الراتب",himage: screenSize.height*0.04,wimage: screenSize.width*0.15,),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-              ImageWithTextMenu(ontap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => JourneyHistories(),));
-              },image: "${Assets.date}",text: "تواريخ الرحلات",),
-              Divider(height: screenSize.height*0.01,color: Colors.white),
+              // ImageWithTextMenu(ontap: (){
+              //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => JourneyHistories(),));
+              // },image: "${Assets.date}",text: "تواريخ الرحلات",),
+              // Divider(height: screenSize.height*0.01,color: Colors.white),
 
               ImageWithTextMenu(ontap: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => RequestResetPassword(),));
-              },image: "${Assets.changepassword}",text: "تغير كلمة السر ",),
+              },image: "${Assets.changepassword}",text: "تغير كلمة السر ",himage: screenSize.height*0.04,wimage: screenSize.width*0.12),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
-              ImageWithTextMenu(ontap: (){},image: "${Assets.date}",text: "نبذه عننا",),
+              ImageWithTextMenu(ontap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => AboutUsPage(),));},image: "${Assets.date}",text: "نبذه عننا",himage: screenSize.height*0.04,wimage: screenSize.width*0.15),
+              Divider(height: screenSize.height*0.01,color: Colors.white),
+
+              ImageWithTextMenu(ontap: (){Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage(),), (route) => false,);},image: "${Assets.logout}",text: "تسجيل الخروج",himage: screenSize.height*0.03,wimage: screenSize.width*0.18),
               Divider(height: screenSize.height*0.01,color: Colors.white),
 
             ],),),

@@ -6,6 +6,8 @@ import 'package:trasportation/features/login/presentation/view%20model/logincubi
 import 'package:trasportation/features/login/presentation/view%20model/loginstate.dart';
 import 'package:trasportation/features/login/presentation/view/widgets/customeTextformfield.dart';
 
+import '../../../../core/widgets/custome_loading_indicator.dart';
+
 class RequestResetPassword extends StatelessWidget {
    RequestResetPassword({super.key});
 
@@ -29,7 +31,10 @@ class RequestResetPassword extends StatelessWidget {
             //button
             BlocBuilder<LoginCubit,LoginState>(builder: (context, state) {
               if(state is IsLoadingRequestPass){
-                return CircleAvatar(radius: 20,child: CircularProgressIndicator(backgroundColor: Colors.red,),backgroundColor: Colors.black,);
+                return const CustomeLoadingIndicator();
+              }
+              else if (state is FailureRequestPass){
+                return Center(child: Text("There is fail,please try again"));
               }
               else {
                return CustomeElevatedBustton(ontap: (){

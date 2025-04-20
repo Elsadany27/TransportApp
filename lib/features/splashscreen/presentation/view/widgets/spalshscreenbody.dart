@@ -14,9 +14,9 @@ class _SpalshScreenBodyState extends State<SpalshScreenBody> with SingleTickerPr
   late AnimationController _animationController;
   @override
   void initState() {
-    _animationController=AnimationController(vsync: this,duration: Duration(seconds: 3),lowerBound: 0.1,upperBound: 0.9);
+    _animationController=AnimationController(vsync: this,duration: Duration(seconds: 2),lowerBound: 0.1,upperBound: 0.9);
     _animationController.forward();
-    Future.delayed(Duration(seconds: 5),() {
+    Future.delayed(Duration(seconds: 2),() {
       Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage(),), (route) => false,);
     },);
   }
@@ -29,7 +29,7 @@ class _SpalshScreenBodyState extends State<SpalshScreenBody> with SingleTickerPr
         builder: (context, child) =>Center(
       child: AnimatedOpacity(
           child: Image.asset(Assets.logo,height:screenSize.height*0.27),
-          opacity: _animationController.value, duration: Duration(seconds: 3)),
+          opacity: _animationController.value, duration: Duration(seconds: 2)),
     ),
     ));
   }
