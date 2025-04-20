@@ -115,7 +115,7 @@ class LoginCubit extends Cubit<LoginState> {
   Future<void> loggin({required String email, required String pass, required BuildContext context}) async {
     emit(IsLoadingState());
     try {
-      iddrivr = await dataSource.authenticateAndFetchDriverId(email, pass);
+      iddrivr = await dataSource.authenticateAndFetchDriverId(email, pass,context);
       if (iddrivr != null) {
         emit(SuccessState());
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("تم تسجيل الدخول بنجاح"))); // Successful login message
@@ -155,7 +155,7 @@ class LoginCubit extends Cubit<LoginState> {
       message = await dataSource.resetPassword(email: email, password: pass);
       if (message != null) {
         emit(SuccessResetPassword());
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message))); // Provide success message
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("تم تغيير كلمة المرور بنجاح"))); // Provide success message
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
       } else {
         emit(FailureResetPassword(errorMessage: "Failed to reset password")); // Handle failure

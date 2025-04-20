@@ -73,7 +73,7 @@ class HomeCubit extends Cubit<HomeState>{
     emit(IsloadingRoute());
     print(homeDataSource.idDriverr);
     try{
-      datta=await homeDataSource.getRouteDriver(email, pass);
+      datta=await homeDataSource.getRouteDriver(email, pass,context);
       print(datta);
       emit(SuccessRoute(data: datta));
     }catch(e){
@@ -88,7 +88,7 @@ class HomeCubit extends Cubit<HomeState>{
     HomeDataSource _homeDataSorurce=HomeDataSource();
     emit(IsloadingDriverInfo());
     try{
-      dataDriver=await _homeDataSorurce.getDriverInfo(mail, password);
+      dataDriver=await _homeDataSorurce.getDriverInfo(mail, password,context);
       print(dataDriver);
       emit(SuccessDriverInfo(driverData: dataDriver));
     }catch(e){

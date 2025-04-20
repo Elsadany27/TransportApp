@@ -99,6 +99,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:trasportation/core/widgets/custome_loading_indicator.dart';
 import 'package:trasportation/features/home/data/model/routes_model.dart';
 import 'package:trasportation/features/home/presentation/view%20model/homecubit/homecubit.dart';
 import 'package:trasportation/features/home/presentation/view/widgets/Customestepper.dart';
@@ -131,9 +132,7 @@ class HomePage extends StatelessWidget {
               BlocBuilder<HomeCubit, HomeState>(
                 builder: (context, state) {
                   if (state is IsloadingRoute) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return Center(child: const CustomeLoadingIndicator());
                   } else if (state is FailureRoute) {
                     return Center(child: Text("${state.errorMessage}"));
                   } else if (state is SuccessRoute) {

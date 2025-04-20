@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:trasportation/core/utilities/app_images.dart';
+import 'package:trasportation/core/widgets/custome_loading_indicator.dart';
 import 'package:trasportation/features/home/data/model/payroll_driver_model.dart';
 import 'package:trasportation/features/home/presentation/view%20model/sidebarcubit/sidebarcubit.dart';
 import 'package:trasportation/features/home/presentation/view%20model/sidebarcubit/sidebarstate.dart';
@@ -13,28 +14,17 @@ class SalaryDetails extends StatelessWidget {
    SalaryDetails({super.key,this.email,this.pass});
 
    String? email,pass;
-   // List<SalaryMonths> data=[
-   //   SalaryMonths(monthname: "يناير",totalsaraly: "4000 ج.م"),
-   //   SalaryMonths(monthname: "قراير",totalsaraly: "5000 ج.م"),
-   //   SalaryMonths(monthname: "مارس",totalsaraly: "2500 ج.م"),
-   //   SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
-   //   SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
-   //   SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
-   //   SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
-   //   SalaryMonths(monthname: "ابريل",totalsaraly: "7500 ج.م"),
-   // ];
-
    PyrollDriverModel? payrollData;
    TextEditingController salarymonth=TextEditingController();
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return BlocProvider(
-  create: (context) => SideBarCubit()..getDriverPayroll(email!, pass!),
+  create: (context) => SideBarCubit()..getDriverPayroll(email!, pass!,context),
   child: Scaffold(
       body: BlocBuilder<SideBarCubit,SideBarState>(builder: (context, state) {
         if(state is IsloadingPyroll){
-          return Center(child: CircleAvatar(child: CircularProgressIndicator(),));
+          return Center(child: CircleAvatar(child: CustomeLoadingIndicator(),));
         }
         else if (state is SuccessPyroll){
           payrollData=state.data;
@@ -49,12 +39,7 @@ class SalaryDetails extends StatelessWidget {
               height:screenSize.height*0.22,
               decoration: BoxDecoration(
                   boxShadow: [
-                    BoxShadow(
-                      color: Colors.black38,
-                      offset: const Offset(5.0, 5.0),
-                      blurRadius: 10.0,
-                      spreadRadius: 2.0,
-                    ),
+                    BoxShadow(color: Colors.black38, offset: const Offset(5.0, 5.0), blurRadius: 10.0, spreadRadius: 2.0,),
                   ],
                   color: Colors.black,borderRadius: BorderRadius.circular(30)),
               child: Column(
@@ -62,19 +47,14 @@ class SalaryDetails extends StatelessWidget {
                 children: [
                   ListTile(
                     title:Text("${payrollData!.result!.data!.driverName}",textDirection: TextDirection.rtl,style: TextStyle(color: Colors.white,fontSize: screenSize.width*0.06,fontWeight: FontWeight.bold),),
-                    subtitle:Text("${payrollData!.result!.data!.driverId}",style: TextStyle(color: Colors.white70),textDirection: TextDirection.rtl,),
+                    subtitle:Text("${payrollData!.result!.data!.driverId} ",style: TextStyle(color: Colors.white70),textDirection: TextDirection.rtl,),
                     // leading: Card(child: Image.asset(Assets.visa,height: screenSize.height*0.04,),color: Colors.black,elevation: 40,shadowColor: Colors.white,),
                     leading: Container(
                       height: screenSize.height*0.05,
                       width: screenSize.width*0.2,
                       decoration: BoxDecoration(
                           boxShadow: [
-                            BoxShadow(
-                              color: Colors.white70,
-                              offset: const Offset(5.0, 15.0),
-                              blurRadius: 65.0,
-                              // spreadRadius: .0,
-                            ),
+                            BoxShadow(color: Colors.white70, offset: const Offset(5.0, 15.0), blurRadius: 65.0,),
                           ],
                           image: DecorationImage(image: AssetImage(Assets.visa),fit: BoxFit.fill)),
                     ),
