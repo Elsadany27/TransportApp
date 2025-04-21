@@ -25,8 +25,8 @@ class HomeCubit extends Cubit<HomeState>{
       emit(ChangeState());
     }
     else{
-       text="ابدا الشيفت";
-       color=Colors.red;
+      text="ابدا الشيفت";
+      color=Colors.red;
       emit(UnchangeState());
     }
   }
@@ -98,4 +98,3 @@ class HomeCubit extends Cubit<HomeState>{
   }
 
 }
-
